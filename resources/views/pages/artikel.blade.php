@@ -7,7 +7,7 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
-          <h1 class="my-4">Page Heading
+          <h1 class="my-4">{{ $article->title }}
             <small>Secondary Text</small>
           </h1>
 
@@ -91,7 +91,7 @@
 <hr>
       <h2>Masukkan Komentar</h2>
       <div id="comment_form">
-          
+
           <div>
               <input type="text" name="name" id="name" value="" placeholder="Input name...">
           </div>
@@ -104,7 +104,7 @@
           <div>
               <input type="submit" name="submit" value="Comment">
           </div>
-          
+
       </div>
 
 
