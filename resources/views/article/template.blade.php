@@ -21,11 +21,11 @@
 
   <body>
 
-    @include('navbar')
+    @include('article.navbar')
 
     @yield('content')
 
-    @include('footer')
+    @include('article.footer')
 
     <!-- Bootstrap core JavaScript -->
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>

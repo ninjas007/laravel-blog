@@ -19,7 +19,14 @@
           <a class="nav-link" href="#">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+          @if (auth()->check())
+            <form action="{{ route('logout') }}" method="POST">
+              @csrf
+              <input type="submit" class="nav-link" style="background: none; border: none;" value="Logout">
+            </form>
+          @else
+            <a class="nav-link" href="{{ route('login') }}">Login</a>
+          @endif
         </li>
       </ul>
     </div>
