@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['create', 'edit']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('index');
+        return view('article.index', [
+            'articles' => Article::all()->sortByDesc('created_at')
+        ]);
     }
 
     /**
@@ -24,7 +31,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('article.create');
     }
 
     /**
@@ -35,7 +42,13 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $article = new Article();
+        $article->title = $request->title;
+        $article->content = $request->content;
+        $article->user()->associate(auth()->user());
+        $article->save();
+
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -46,7 +59,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view('pages.artikel', [
+        return view('article.show', [
             'article' => $article
         ]);
     }
@@ -59,7 +72,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-
+        return view('article.edit', compact('article'));
     }
 
     /**
@@ -71,7 +84,11 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $article->title = $request->title;
+        $article->content = $request->content;
+        $article->save();
+
+        return redirect()->route('articles.show', ['id' => $article->id]);
     }
 
     /**
@@ -82,6 +99,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+
+        return redirect()->route('articles.index');
     }
 }

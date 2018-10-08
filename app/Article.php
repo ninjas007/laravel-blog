@@ -8,8 +8,8 @@ class Article extends Model
 {
     protected $table = 'articles';
 
-    // public function getRouteKeyName()
-    // {
-    //     return 'title';
-    // }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
