@@ -14,7 +14,8 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <a href="{{ route('articles.index') }}" title="Article">Article</a>
+                    <a href="{{ route('articles.create') }}" title="Create Article">Create Article</a>
                 </div>
             </div>
         </div>
